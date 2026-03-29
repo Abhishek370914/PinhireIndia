@@ -44,7 +44,7 @@ export default function SmartMatchRadar() {
     setTimeout(() => {
       // Generate scores for all currently visible companies
       const matches: Record<string, { score: number; reasons: string[] }> = {}
-      
+
       const scoredCompanies = visibleCompanies.map(c => {
         // Base score 65-98
         const score = Math.floor(65 + Math.random() * 34)
@@ -52,7 +52,7 @@ export default function SmartMatchRadar() {
         const reasons = [...MOCK_REASONS]
           .sort(() => 0.5 - Math.random())
           .slice(0, reasonCount)
-          
+
         return { id: c.id, score, reasons }
       }).sort((a, b) => b.score - a.score)
 
@@ -78,11 +78,10 @@ export default function SmartMatchRadar() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleRadarClick}
-          className={\`relative flex items-center gap-2.5 px-6 py-3.5 rounded-full font-bold shadow-2xl transition-all \${
-            isRadarActive 
-              ? "bg-white text-saffron border-2 border-saffron" 
+          className={`relative flex items-center gap-2.5 px-6 py-3.5 rounded-full font-bold text-base transition-all duration-300 ${isRadarActive
+              ? "bg-white text-saffron border-2 border-saffron shadow-lg"
               : "bg-saffron text-white globe-glow-saffron border border-white/20"
-          }\`}
+            }`}
         >
           {isRadarActive ? (
             <>
@@ -131,22 +130,22 @@ export default function SmartMatchRadar() {
               exit={{ scale: 0.9, y: 20 }}
               className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative"
             >
-              <button 
+              <button
                 onClick={() => setShowProfilePrompt(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-900"
               >
                 <X className="w-5 h-5" />
               </button>
-              
+
               <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-6 mx-auto">
                 <UserCircle2 className="w-8 h-8 text-saffron" />
               </div>
-              
+
               <h2 className="text-2xl font-display font-bold text-center mb-2">Complete Your Profile</h2>
               <p className="text-gray-500 text-center text-sm mb-6">
                 To use the Smart Match Radar, our AI needs to compare your skills, experience, and salary expectations against thousands of mapped companies.
               </p>
-              
+
               <div className="space-y-3 mb-8">
                 {["Upload your latest Resume", "Add 3 core technical skills", "Set salary expectations"].map((req, i) => (
                   <div key={i} className="flex items-center gap-3 text-sm font-medium text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
@@ -155,16 +154,16 @@ export default function SmartMatchRadar() {
                   </div>
                 ))}
               </div>
-              
+
               <div className="flex flex-col gap-3">
-                <Button 
+                <Button
                   onClick={() => setShowProfilePrompt(false)}
                   variant="outline"
                   className="w-full rounded-xl py-6 font-semibold"
                 >
                   Edit Profile Manually
                 </Button>
-                <Button 
+                <Button
                   onClick={runAIScan}
                   className="w-full rounded-xl py-6 font-semibold bg-saffron hover:bg-saffron/90 glow-saffron gap-2"
                 >
